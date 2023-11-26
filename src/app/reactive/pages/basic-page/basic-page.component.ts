@@ -31,8 +31,26 @@ inStorage:[0, [Validators.required, Validators.min(0)]],
 
 //this.myForm.reset( rtx5090);
 }
+isValidFiel( field: string ): boolean | null{
+  return this.myForm.controls[field].errors
+  && this.myForm.controls[field].touched;
 
+}
+getFieldError(field: string): string | null{
+  if( !this.myForm.controls[field] ) return null;
+const errors = this.myForm.controls[field].errors || {};
+for (const key of Object.keys(errors)) {
+  // console.log(key);
+  switch( key ){
+    case 'required':
+      return 'Este campo es requerido';
+      case 'minlength':
+      return `Minimo ${errors ['minlength'].requiredLenght} caracters.`;
+  }
 
+}
+return null;
+}
   onSave():void{
     if(this.myForm.invalid){
 this.myForm.markAllAsTouched();
