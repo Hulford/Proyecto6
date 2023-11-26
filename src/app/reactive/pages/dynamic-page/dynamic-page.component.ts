@@ -45,7 +45,9 @@ for (const key of Object.keys(errors)) {
 return null;
 }
 
-
+onDelteFavorite( i:number):void{
+this.favoriteGames.removeAt(i);
+}
  onSubmit():void{
   if( this.myForm.invalid){
     this.myForm.markAllAsTouched();
